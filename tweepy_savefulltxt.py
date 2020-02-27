@@ -38,7 +38,7 @@ def getTwitterData(keyword, dfile):
 
 
 def main():
-    print('====== Enter Serch KeyWord   =====')
+    print('====== Enter Search KeyWord   =====')
     keyword = input('>  ')
 
     print('====== Enter Tweet Data file =====')
