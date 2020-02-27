@@ -4,6 +4,9 @@ try:
     import csv
     import json
     import random
+    import neologdn
+    import re
+    from os import path
     import MeCab
     import matplotlib
     matplotlib.use('Agg')
@@ -29,7 +32,10 @@ def analyzeTweet(dfile):
         reader = f.readline()
 
         while reader:
-            node = mecab.parseToNode(reader)
+            normalized_text = neologdn.normalize(reader)
+            text_without_url = re.sub(
+                r'https?://[\w/:%#\$&\?\(\)~\.=\+\-]+', '', normalized_text)
+            node = mecab.parseToNode(text_without_url)
 
             while node:
                 word_type = node.feature.split(",")[0]
@@ -49,25 +55,19 @@ def analyzeTweet(dfile):
     font_path = json_obj['Font_path']
     txt = " ".join(words)
 
-    stop_words = ['https', 'co', 'th',
-                  u'くれる', u'10周年', u'周年', u'記念', u'タグ',
-                  u'もの', u'こと', u'なる', u'する', u'いる', u'ある', u'てる', u'よう', u'れる', u'くい', u'せる', u'ない', u'無い', u'られる', u'それ', u'そう', u'くん', u'さん', u'あと', u'これ', u'どう', u'たち']  # 画像内に含めないようにする単語
+    stop_words = []  # 画像内に含めないようにする単語
 
     wordcloud = WordCloud(color_func=color_func,
                           font_path=font_path,
-                          width=1920,
-                          height=1080,
-                          min_font_size=6,
+                          width=1920,  # 出力画像の横幅
+                          height=1080,  # 出力画像の縦幅
+                          min_font_size=6,  # 最小のフォントサイズ
                           stopwords=set(stop_words),
                           collocations=False,
-                          background_color="white").generate(txt)
+                          background_color="white").generate(txt)  # 背景色
 
-    plt.figure(figsize=(19.20, 10.80), dpi=100)
-    plt.imshow(wordcloud, interpolation="nearest", aspect="equal")
-    plt.axis("off")
-
-    sname = sname + ".png"
-    plt.savefig(sname, bbox_inches='tight')
+    sname = sname + ".png"  # 保存形式変えたい場合は拡張子を変更
+    wordcloud.to_file(path.join(path.dirname(__file__), sname))
 
 
 if __name__ == '__main__':

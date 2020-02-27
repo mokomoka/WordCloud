@@ -26,10 +26,14 @@ Twitter API を利用して、ツイートの検索結果からワードクラ�
 
 ## 参考
 
+- [WordCloud for Python documentation](http://amueller.github.io/word_cloud/index.html)
 - [Python Twitter からツイートを取得してテキスト分析(wordcloud で見える化)](https://qiita.com/kngsym2018/items/3719f8da1f129793257c)
+- [Python で WordCloud を作成してみました](https://mmtomitomimm.blogspot.com/2018/12/word-cloud.html)
+- [形態素解析前の日本語文書の前処理 (Python)](https://ohke.hateblo.jp/entry/2019/02/09/141500)
 
 ## 備考
 
-- 現状、画像サイズの設定が怪しいです。
-- URL とか RT の除外ができていないので、生成されるワードクラウドにノイズが混ざりがちです…><
+- ~~現状、画像サイズの設定が怪しいです。~~ 直しました。
+- ~~URL とか~~ RT の除外ができていないので、生成されるワードクラウドにノイズが混ざりがちです…><
   - RT は検索ワードに "-RT"を入れれば除外できますが、コード上で除外することはしていません。
+  - URL はワードクラウド生成時に除外するようにしました！
