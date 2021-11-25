@@ -3,7 +3,7 @@
 ## 概要
 
 Twitter API を利用して、ツイートの検索結果からワードクラウドを生成します。  
-（とはいえ、ツイート取得とワードクラウド生成のプログラムは分けているので、ツイートじゃなくてもテキストファイルさえあればそれを基に生成できます。）
+（とはいえ、ツイート取得とワードクラウド生成のプログラムは分けているので、ツイートじゃなくてもテキストファイルさえあればそれを基に生成できます。テキストファイルからワードクラウドを生成する場合は、使い方の2のAPI関連の入力と、3の手順を飛ばします。）
 
 こんなやつ ↓  
 <img src="https://user-images.githubusercontent.com/27045715/75446511-e6388e80-59aa-11ea-9d35-42d17222f539.png" width="300px">
@@ -30,6 +30,7 @@ Twitter API を利用して、ツイートの検索結果からワードクラ�
 - [Python Twitter からツイートを取得してテキスト分析(wordcloud で見える化)](https://qiita.com/kngsym2018/items/3719f8da1f129793257c)
 - [Python で WordCloud を作成してみました](https://mmtomitomimm.blogspot.com/2018/12/word-cloud.html)
 - [形態素解析前の日本語文書の前処理 (Python)](https://ohke.hateblo.jp/entry/2019/02/09/141500)
+- [mecab-python3で-Ochasenを再現する方法](https://gist.github.com/polm/b305d500df28f190e346d50447682ec6)
 
 ## 備考
 
@@ -37,3 +38,4 @@ Twitter API を利用して、ツイートの検索結果からワードクラ�
 - ~~URL とか~~ RT の除外ができていないので、生成されるワードクラウドにノイズが混ざりがちです…><
   - RT は検索ワードに "-RT"を入れれば除外できますが、コード上で除外することはしていません。
   - URL はワードクラウド生成時に除外するようにしました！
+- mecab-python3対応のなんやかんやで、本来はunidicが推奨されていますが、現状ipadicを使用した上でChasen形式に変換しています。将来的にはunidicを使うように修正したい。

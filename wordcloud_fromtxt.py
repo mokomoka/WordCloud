@@ -2,6 +2,7 @@ try:
     from wordcloud import WordCloud
     from datetime import datetime
     import csv
+    import ipadic
     import json
     import random
     import neologdn
@@ -24,7 +25,10 @@ def analyzeTweet(dfile):
     fname = fname.replace("'", "")
     sname = datetime.now().strftime("%Y%m%d%H%M%S")  # 保存するときのファイル名
 
-    mecab = MeCab.Tagger("-Ochasen")
+    CHASEN_ARGS = r' -F "%m\t%f[7]\t%f[6]\t%F-[0,1,2,3]\t%f[4]\t%f[5]\n"'
+    CHASEN_ARGS += r' -U "%m\t%m\t%m\t%F-[0,1,2,3]\t\t\n"'
+    mecab = MeCab.Tagger(ipadic.MECAB_ARGS + CHASEN_ARGS)
+
 
     words = []
 
