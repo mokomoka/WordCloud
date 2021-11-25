@@ -2,7 +2,6 @@ try:
     from wordcloud import WordCloud
     from datetime import datetime
     import csv
-    import ipadic
     import json
     import random
     import neologdn
@@ -25,10 +24,7 @@ def analyzeTweet(dfile):
     fname = fname.replace("'", "")
     sname = datetime.now().strftime("%Y%m%d%H%M%S")  # 保存するときのファイル名
 
-    CHASEN_ARGS = r' -F "%m\t%f[7]\t%f[6]\t%F-[0,1,2,3]\t%f[4]\t%f[5]\n"'
-    CHASEN_ARGS += r' -U "%m\t%m\t%m\t%F-[0,1,2,3]\t\t\n"'
-    mecab = MeCab.Tagger(ipadic.MECAB_ARGS + CHASEN_ARGS)
-
+    mecab = MeCab.Tagger()
 
     words = []
 
@@ -43,10 +39,9 @@ def analyzeTweet(dfile):
 
             while node:
                 word_type = node.feature.split(",")[0]
-
                 if word_type in ["動詞", "形容詞", "形容動詞"]:
                     # 動詞、形容詞、形容動詞は原型を使っています
-                    words.append(node.feature.split(",")[6])
+                    words.append(node.feature.split(",")[7])
                 elif word_type in ["名詞", "副詞"]:
                     words.append(node.surface)
 
