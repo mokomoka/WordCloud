@@ -8,6 +8,15 @@ Twitter API を利用して、ツイートの検索結果からワードクラ�
 こんなやつ ↓  
 <img src="https://user-images.githubusercontent.com/27045715/75446511-e6388e80-59aa-11ea-9d35-42d17222f539.png" width="300px">
 
+## 環境
+```sh
+$ python --version
+Python 3.9.13 # neologdnの都合上、Python 3.9までしか動作しません
+
+$ pip install tweepy wordcloud mecab-python3 unidic-lite neologdn
+```
+（Pythonに詳しくないため、依存関係情報が足りなかったら申し訳ありません…）  
+
 ## 使い方
 
 1. config_sample.json を config.json にリネームします。

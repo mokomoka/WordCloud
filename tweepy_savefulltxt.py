@@ -27,7 +27,7 @@ def getTwitterData(keyword, dfile):
 
     tweets_data = []
 
-    for tweet in tweepy.Cursor(api.search, q=q, include_entities=True, tweet_mode='extended').items():
+    for tweet in tweepy.Cursor(api.search_tweets, q=q, include_entities=True, tweet_mode='extended').items():
         tweets_data.append(tweet.full_text + '\n')
 
     fname = r"'" + dfile + "'"
